@@ -1,0 +1,28 @@
+language: generic
+dist: xenial
+before_install:
+- pyenv global 3.6.7
+- phpenv global 7.2
+install:
+- pip install --user awscli
+- pip install --user aws-sam-cli
+script:
+- composer install --no-interaction --optimize-autoloader --prefer-dist
+- composer test
+after_success:
+- wget https://scrutinizer-ci.com/ocular.phar
+- php ocular.phar code-coverage:upload --format=php-clover ./clover.xml
+before_deploy:
+- composer update --no-dev
+- composer package
+deploy:
+  provider: script
+  script: composer deploy
+  skip_cleanup: true
+  on:
+    repo: guillermoandrae/php-lambda-skeleton
+env:
+  global:
+  - AWS_DEFAULT_REGION=us-east-1
+  - secure: mJ60XI/jRvLk30BkR16Iq5d0nGncCLQ3LDKfOwfWCNu+6ui1+q9bijSfkvdvw6V7bQ7AHWBmWAMUZfifzh8jhoBZ7yOZq1i0nJ2NdtNB1vZa6/D0+jyaoPSng/vWGbmPZBIT+HHMta9r1Se3cWPDfg3d4h28T7Prs/DYpeAblp66BWhTZ55TJx+tyQf92pgfTBzC/xRiKlajUOsa2Ns0n8py/Wf4U9VhvigS3oDaNFmwEAnoqoytXgvcQL0rUn3zrL38M4W5SsqCgT9UbMJqYthIClVyERBf2D3lWmBlYY9OLPPJC2KeXfqy+syrLFw2szVITcBMZ5biaVQuXdAHmbeAcvK3VxpDfsmJ9LfsguA/mXH+H7EqB8lE0V7+petfjYEeJgguX5CUP8Fj8ZwYWeyFyuPV4+lI8iPG+2k2qzbXJTwaW9xBOcPKiNIUGrS+cRLmJYnvV/Qq/+ZnKg1E5nGEojDkezgLNzP6KGTbsDwu7UQPqtsuTrygoGxpiCPVzp8OZa+r+o1liJIFAGrRrYRjt86lp8e2r6AYzhU0c8yeiSu1jRZTQ6dRR3Ii0GjQr+lQi21BoAp9t66yu9JMYHbyBpMD0iriglt1tsS+rz72s779cLTZqCJLww2QEe5Pj7QyYMVy2x5UpBFzyFdB+W2WYJz2MQdMncTpzD8K0NY=
+  - secure: m8yQXo2g+b2+LYFbBRnwugXxjhQSwxHBOkIFFKY7p6dDCZjux6ostIhPBPnB122ESuf0TQqlTcRoKak+HoSO2BxYropJdsVh4qEmvZ14GIr4y3/AoH3Mnv7LbHeoZnKBf1/VveENqPWStIqJUSfLH1DclDAnDBvcU7pgTxNpZflbPsbPPVx2vBvkB01nJcZ2mt/aqJP69hRCTQ5yI2DhymjQ/QWK7I7XnDc9dfXhvqGT+eapAbHHB2y+pKbMxqnRKZEIFKsMgob54wpH5Zv6z/eXtIciMcvCeAJJbOW9RDBLhJ7VIcKJgvuoGTpcK+JSziPUiCnENML7GiUi/S3qZQ2Ygk2UexE0uQV3fcWaQ4aZHBQTdQk5TasoaTd7ob4y6Y9Ew+bxJ5OpvRBGnaHtckNSME9WAaVKWmrawxdmdZiVNbv2lz+CVklCJbFDG80wZODlAkSaVqokWHHeIEg6EZ4tewp6oxxYjuL6BhPOFYsuZRxd16vrwLp7VrbfS7q6lgGheLGsrVfxo34p59/70qW0W/vLB4ZC8KTLLnE8lMdKblE2xDWi4TZM5J4EDoXSI+j6w1aAXJ7ug9aqU1dFOv3yU3x/zgBU8G1vFpRB7uyTO9t/d5ZxV2jyohdE0wvIdP9PJ2wH5InYK1+65T+oXHtPDVICinGv3jrcMjzvbMg=

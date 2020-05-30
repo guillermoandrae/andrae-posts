@@ -1,0 +1,5 @@
+vendor
+clover.xml
+.phpunit.result.cache
+report
+.stack.yaml
