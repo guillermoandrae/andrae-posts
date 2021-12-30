@@ -52,6 +52,14 @@ final class Response extends AbstractApiGatewayResponse
         $eventBody = json_decode($this->getEvent()['body'], true);
         foreach ($eventBody as $key => $value) {
             switch ($key) {
+                case 'originalAuthor':
+                    if (!strstr($value, '|')) {
+                        $data['originalAuthor'] = $value;
+                        break;
+                    }
+                    $parts = explode('|', $value);
+                    $data['originalAuthor'] = empty($parts[1]) ? $parts[0] : $parts[1];
+                    break;
                 case 'createdAt':
                     $data['createdAt'] = strtotime($value);
                     break;
