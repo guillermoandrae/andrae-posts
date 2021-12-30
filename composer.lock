@@ -351,22 +351,21 @@
         },
         {
             "name": "guillermoandrae/fisher",
-            "version": "2.0.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guillermoandrae/fisher.git",
-                "reference": "834289679a8bea21c64e5ac38dc43278369de37a"
+                "reference": "1398114d367104aece1db7d96ed8269d719680af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guillermoandrae/fisher/zipball/834289679a8bea21c64e5ac38dc43278369de37a",
-                "reference": "834289679a8bea21c64e5ac38dc43278369de37a",
+                "url": "https://api.github.com/repos/guillermoandrae/fisher/zipball/1398114d367104aece1db7d96ed8269d719680af",
+                "reference": "1398114d367104aece1db7d96ed8269d719680af",
                 "shasum": ""
             },
             "require": {
-                "aws/aws-sdk-php": "^3.95",
-                "guillermoandrae/php-repository": "^3.0",
-                "icanboogie/inflector": "^2.0",
+                "guillermoandrae/php-dynamodb": "*",
+                "guillermoandrae/php-repository": "*",
                 "php": "^8.0"
             },
             "require-dev": {
@@ -376,7 +375,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Guillermoandrae\\Fisher\\": "src/"
+                    "App\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -386,9 +385,9 @@
             "description": "Data access layer for the Andrae API",
             "support": {
                 "issues": "https://github.com/guillermoandrae/fisher/issues",
-                "source": "https://github.com/guillermoandrae/fisher/tree/2.0.0"
+                "source": "https://github.com/guillermoandrae/fisher/tree/3.0.0"
             },
-            "time": "2021-12-29T23:50:23+00:00"
+            "time": "2021-12-30T14:28:07+00:00"
         },
         {
             "name": "guillermoandrae/php-collection",
@@ -484,6 +483,46 @@
                 "source": "https://github.com/guillermoandrae/php-debug/tree/1.0.0"
             },
             "time": "2020-05-31T00:30:58+00:00"
+        },
+        {
+            "name": "guillermoandrae/php-dynamodb",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guillermoandrae/php-dynamodb.git",
+                "reference": "66bd8013303da27fcfc02f759738e8806476abd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guillermoandrae/php-dynamodb/zipball/66bd8013303da27fcfc02f759738e8806476abd6",
+                "reference": "66bd8013303da27fcfc02f759738e8806476abd6",
+                "shasum": ""
+            },
+            "require": {
+                "aws/aws-sdk-php": "^3.95",
+                "guillermoandrae/php-collection": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Guillermoandrae\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP library that can be used to interact with Amazon DynamoDB",
+            "support": {
+                "issues": "https://github.com/guillermoandrae/php-dynamodb/issues",
+                "source": "https://github.com/guillermoandrae/php-dynamodb/tree/2.0.0"
+            },
+            "time": "2021-12-30T03:36:22+00:00"
         },
         {
             "name": "guillermoandrae/php-lambda-api-gateway-response",

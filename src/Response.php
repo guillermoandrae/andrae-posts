@@ -50,6 +50,8 @@ final class Response extends AbstractApiGatewayResponse
     {
         $data = [];
         $eventBody = $this->getEvent()['body'];
+        $this->setBodyData($eventBody);
+        return;
         foreach ($eventBody as $key => $value) {
             switch ($key) {
                 case 'createdAt':

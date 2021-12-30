@@ -3,12 +3,11 @@
 namespace AppTest;
 
 use App\Response;
-use Aws\DynamoDb\DynamoDbClient;
-use Aws\DynamoDb\Marshaler;
-use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
-use Guillermoandrae\Fisher\Db\DynamoDb\KeyTypes;
-use Guillermoandrae\Fisher\Repositories\PostsRepository;
+use Guillermoandrae\DynamoDb\Constant\AttributeTypes;
+use Guillermoandrae\DynamoDb\Constant\KeyTypes;
+use Guillermoandrae\DynamoDb\DynamoDbAdapter;
 use Guillermoandrae\Lambda\Contracts\ApiGatewayResponseInterface;
+use Guillermoandrae\Repositories\RepositoryFactory;
 use PHPUnit\Framework\TestCase;
 
 final class ResponseTest extends TestCase
@@ -56,28 +55,15 @@ final class ResponseTest extends TestCase
     {
         parent::setUp();
         $response = new Response();
-        $sdk = new DynamoDbClient([
-            'region' => 'us-east-1',
-            'version' => 'latest',
-            'endpoint' => 'http://localhost:8000',
-            'credentials' => [
-                'key' => 'not-a-key',
-                'secret' => 'not-a-secret'
-            ]
-        ]);
-        $dynamoDbAdapter = new DynamoDbAdapter($sdk, new Marshaler());
-        $postRepository = new PostsRepository($dynamoDbAdapter);
-        $response->setRepository($postRepository);
-        if (!$dynamoDbAdapter->useTable(self::TABLE_NAME)->tableExists()) {
-            $dynamoDbAdapter->useTable(self::TABLE_NAME)->createTable([
-                'originalAuthor' => [
-                    'type' => 'S', 'keyType' => KeyTypes::HASH
-                ],
-                'createdAt' => [
-                    'type' => 'N', 'keyType' => KeyTypes::RANGE
-                ]
-            ]);
+        $dynamoDbAdapter = new DynamoDbAdapter();
+        if (!$dynamoDbAdapter->tableExists(self::TABLE_NAME)) {
+            $dynamoDbAdapter->createTable([
+                'originalAuthor' => [AttributeTypes::STRING, KeyTypes::HASH],
+                'createdAt' => [AttributeTypes::NUMBER, KeyTypes::RANGE],
+            ], self::TABLE_NAME);
         }
+        $postRepository = RepositoryFactory::factory('posts', $dynamoDbAdapter);
+        $response->setRepository($postRepository);
         $this->response = $response;
     }
 
