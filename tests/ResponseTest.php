@@ -20,11 +20,11 @@ final class ResponseTest extends TestCase
     {
         $this->getResponse()->setEvent([
             'httpMethod' => 'PUT',
-            'body' => [
+            'body' => json_encode([
                 'originalAuthor' => 'testing',
                 'createdAt' => 'yesterday',
                 'source' => 'Friendster',
-            ]
+            ])
         ]);
         $this->getResponse()->send();
         $this->assertEquals(201, $this->getResponse()->getStatusCode());

@@ -49,9 +49,7 @@ final class Response extends AbstractApiGatewayResponse
     private function createPost(): void
     {
         $data = [];
-        $eventBody = $this->getEvent()['body'];
-        $this->setBodyData($eventBody);
-        return;
+        $eventBody = json_decode($this->getEvent()['body'], true);
         foreach ($eventBody as $key => $value) {
             switch ($key) {
                 case 'createdAt':
