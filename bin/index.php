@@ -13,10 +13,6 @@ return function (array $event) {
     $sdk = new DynamoDbClient([
         'region' => 'us-east-1',
         'version' => 'latest',
-        /*'credentials' => [
-            'key' => 'AKIAVOCSIZ2PHWVJASU3',
-            'secret' => '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'
-        ]*/
     ]);
     $dynamoDbAdapter = new DynamoDbAdapter($sdk, new Marshaler());
     $postRepository = new PostsRepository($dynamoDbAdapter);
