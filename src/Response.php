@@ -48,10 +48,22 @@ final class Response extends AbstractApiGatewayResponse
 
     private function createPost(): void
     {
-        $data = $this->getEvent()['body'];
-        $data['createdAt'] = strtotime($data['createdAt']);
-        $data['platform'] = $data['source'];
-        unset($data['source']);
+        $data = [];
+        $eventBody = $this->getEvent()['body'];
+        foreach ($eventBody as $key => $value) {
+            switch ($key) {
+                case 'createdAt':
+                    $data['createdAt'] = strtotime($value);
+                    break;
+                case 'source':
+                    $data['platform'] = $value;
+                    break;
+                default:
+                    $data[$key] = $value;
+                    break;
+            }
+        }
+
         if ($this->getRepository()->create($data)) {
             $this->setStatusCode(201);
             $this->setBodyData([]);
