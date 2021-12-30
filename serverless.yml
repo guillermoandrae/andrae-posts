@@ -1,0 +1,23 @@
+service: app
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: provided.al2
+
+plugins:
+  - ./vendor/bref/bref
+
+functions:
+  andrae-posts:
+    handler: ./bin/index.php
+    description: ''
+    layers:
+      - ${bref:layer.php-80}
+    name: andrae-posts
+    role: arn:aws:iam::373834698398:role/AndraeAPIRole
+
+# Exclude files from deployment
+package:
+  exclude:
+    - 'tests/**'
