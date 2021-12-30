@@ -3,8 +3,8 @@
 use App\Response;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
-use Guillermoandrae\Fisher\Db\DynamoDb\DynamoDbAdapter;
-use Guillermoandrae\Fisher\Repositories\PostsRepository;
+use App\Repositories\PostsRepository;
+use Guillermoandrae\DynamoDb\DynamoDbAdapter;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
