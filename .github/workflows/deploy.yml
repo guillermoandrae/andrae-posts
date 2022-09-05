@@ -6,21 +6,32 @@ on:
       - main
 
 jobs:
+  test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v1
+
+      - name: Configure PHP
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+
+      - name: Install dependencies
+      - run: composer install --prefer-dist --optimize-autoloader
+
+      - name: Run tests
+        uses: chindit/actions-phpunit@master
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.0"
-      - uses: "ramsey/composer-install@v1"
-        with:
-          composer-options: "--prefer-dist --optimize-autoloader --no-dev"
+      - name: Install dependencies
+      - run: composer install --prefer-dist --optimize-autoloader --no-dev
+
       - name: Run serverless deploy
         uses: serverless/github-action@v2
         with:
