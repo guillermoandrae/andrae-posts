@@ -18,8 +18,8 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --optimize-autoloader
 
-      - name: Run tests
-        uses: chindit/actions-phpunit@master
+      - name: Lint
+        run: composer check-style
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
