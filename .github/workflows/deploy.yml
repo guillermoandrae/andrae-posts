@@ -2,8 +2,7 @@ name: Deploy master branch
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   test:
@@ -15,11 +14,6 @@ jobs:
       - name: Configure Node.js
         uses: actions/setup-node@v1
 
-      - name: Configure PHP
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.1"
-
       - name: Install dependencies
       - run: composer install --prefer-dist --optimize-autoloader
 
@@ -30,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-      - run: composer install --prefer-dist --optimize-autoloader --no-dev
+        run: composer install --prefer-dist --optimize-autoloader --no-dev
 
       - name: Run serverless deploy
         uses: serverless/github-action@v2
