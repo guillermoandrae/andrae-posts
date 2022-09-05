@@ -15,7 +15,7 @@ functions:
     layers:
       - ${bref:layer.php-81}
     name: andrae-posts
-    role: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_NAME }}
+    role: arn:aws:iam::373834698398:role/AndraeAPIRole
 
 # Exclude files from deployment
 package:
