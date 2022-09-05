@@ -11,9 +11,9 @@ plugins:
 functions:
   andrae-posts:
     handler: ./bin/index.php
-    description: ''
+    description: "Posts API"
     layers:
-      - ${bref:layer.php-80}
+      - ${bref:layer.php-81}
     name: andrae-posts
     role: arn:aws:iam::373834698398:role/AndraeAPIRole
 
