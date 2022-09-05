@@ -5,3 +5,4 @@ report
 .stack.yaml
 events/
 database/
+*.local
