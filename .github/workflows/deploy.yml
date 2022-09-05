@@ -12,9 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Configure Node.js
-        uses: actions/setup-node@v1
-
       - name: Install dependencies
         run: composer install --prefer-dist --optimize-autoloader
 
@@ -24,6 +21,8 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Install dependencies
         run: composer install --prefer-dist --optimize-autoloader --no-dev
 
