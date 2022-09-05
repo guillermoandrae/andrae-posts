@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --optimize-autoloader
 
-      - name: Lint
+      - name: PHP Lint
         run: composer check-style
   deploy:
     name: Deploy
