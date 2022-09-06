@@ -6,6 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
+
   test:
     name: Build & Test
     runs-on: ubuntu-latest
@@ -15,8 +16,18 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --optimize-autoloader
 
-      - name: PHP Lint
+      - name: Check styles
         run: composer check-style
+
+      - name: Setup DynamoDB Local
+        uses: rrainn/dynamodb-action@v2.0.1
+        with:
+          port: 8000
+          cors: '*'
+
+      - name: Run tests
+        run: phpunit --coverage-text --coverage-clover=./clover.xml
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
