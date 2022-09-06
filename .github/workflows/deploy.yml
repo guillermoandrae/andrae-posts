@@ -8,7 +8,7 @@ on:
 jobs:
 
   test:
-    name: Build & Test
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --optimize-autoloader
 
-      - name: Check styles
+      - name: Run coding standards check
         run: composer check-style
 
       - name: Setup DynamoDB Local
