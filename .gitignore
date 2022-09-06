@@ -1,8 +1,10 @@
-vendor
+/vendor
+
+/database
+/events
+/report
 clover.xml
 .phpunit.result.cache
-report
+nohup.out
+
 .stack.yaml
-events/
-database/
-*.local
